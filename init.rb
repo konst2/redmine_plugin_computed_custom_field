@@ -1,7 +1,7 @@
 Redmine::Plugin.register :computed_custom_field do
   name 'Computed custom field'
-  author 'Yakov Annikov'
-  url 'https://github.com/annikoff/redmine_plugin_computed_custom_field'
+  author 'Yakov Annikov. Modified by Konstantin Budnikov'
+  url 'https://github.com/konst2/redmine_plugin_computed_custom_field'
   description ''
   version '1.0.6'
   settings default: {}
@@ -20,4 +20,9 @@ RedmineApp::Application.configure do
   config.after_initialize do
     ComputedCustomField.patch_models
   end
+end
+
+
+Rails.application.config.to_prepare do
+  CustomFieldsHelper.send(:include, ComputedCustomField::CustomFieldsHelperPatch)
 end
